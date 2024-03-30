@@ -1,0 +1,22 @@
+---
+
+- hosts: web_servers
+  become: true
+  tasks:
+  - name: update and upgrade and install mariadb
+    tags: update
+    package:
+      name:
+        - mariadb-server
+      update_cache: yes
+
+- hosts: db_servers
+  become: true
+  tasks:
+  - name: install packages
+    tags: install
+    package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
