@@ -1,4 +1,12 @@
 ---
+- hosts: all
+  become: true
+  tasks:
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEw9F8TF+1rCIaKe9ZBOdkod7JnpeUG8ebsvR4zsRgG9 ansible"
 
 - hosts: web_servers
   become: true
@@ -9,7 +17,7 @@
       name:
         - mariadb-server
       update_cache: yes
-
+      changed_when: false
   - name: copy files
     tags: update,files
     copy:
