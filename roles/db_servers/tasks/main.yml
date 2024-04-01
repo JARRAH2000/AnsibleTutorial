@@ -1,0 +1,7 @@
+- name: install packages
+  tags: install
+  package:
+    name:
+      - apache2
+      - libapache2-mod-php
+    state: latest

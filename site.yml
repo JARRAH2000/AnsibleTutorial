@@ -17,7 +17,8 @@
       name:
         - mariadb-server
       update_cache: yes
-      changed_when: false
+    changed_when: false
+
   - name: copy files
     tags: update,files
     copy:
@@ -52,3 +53,23 @@
       mode: 0755
       owner: root
       group: root
+
+- hosts: all
+  become: true
+  roles:
+    - base
+
+- hosts: web_servers
+  become: true
+  roles:
+    - web_servers
+
+- hosts: db_servers
+  become: true
+  roles:
+    - db_servers
+
+- hosts: manager_server
+  become: true
+  roles:
+    - manager_server

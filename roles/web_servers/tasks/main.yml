@@ -1,0 +1,17 @@
+- name: update and upgrade and install mariadb
+  tags: update
+  package:
+    name:
+      - mariadb-server
+    update_cache: true
+  changed_when: false
+
+- name: copy files
+  tags: update,files
+  copy:
+    src: default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+
