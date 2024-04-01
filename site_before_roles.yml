@@ -1,0 +1,54 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEw9F8TF+1rCIaKe9ZBOdkod7JnpeUG8ebsvR4zsRgG9 ansible"
+
+- hosts: web_servers
+  become: true
+  tasks:
+  - name: update and upgrade and install mariadb
+    tags: update
+    package:
+      name:
+        - mariadb-server
+      update_cache: yes
+      changed_when: false
+  - name: copy files
+    tags: update,files
+    copy:
+      src: default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
+
+- hosts: db_servers
+  become: true
+  tasks:
+  - name: install packages
+    tags: install
+    package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
+
+- hosts: manager_server
+  become: true
+  tasks:
+  - name: install unzip
+    package:
+      name: unzip
+  - name: install terraform
+    unarchive:
+      src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: 0755
+      owner: root
+      group: root
