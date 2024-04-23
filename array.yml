@@ -1,0 +1,16 @@
+---
+- name: Array sample
+  hosts: all
+  vars:
+    users:
+      alice:
+        firstname: Alice
+        homedir: /users/alice
+      bob:
+        firstname: Bob
+        homedir: /users/bob
+  tasks:
+    - name: Hi
+      ansible.builtin.debug:
+        msg: "{{ users.alice.firstname }}"
+...

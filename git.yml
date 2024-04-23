@@ -1,0 +1,14 @@
+---
+- name: git module demo
+  hosts: all
+  become: true
+  tasks:
+    - name: ensure git pkg installed
+      ansible.builtin.apt:
+        name: git
+        state: present
+    - name: checkout git repo
+      ansible.builtin.git:
+        repo: https://github.com/JARRAH2000/AnsibleTutorial
+        dest: ~/Desktop/ansible/AnsibleTutorial
+...

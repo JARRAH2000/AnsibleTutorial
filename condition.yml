@@ -1,0 +1,13 @@
+---
+- name: conditional_basic
+  hosts: all
+  become: yes
+  vars:
+    configure_nginx: true
+  tasks:
+    - name: install nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      when: configure_nginx
+...

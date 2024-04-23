@@ -1,0 +1,21 @@
+---
+- name: git ssh module demo
+  hosts: all
+  become: true
+  vars:
+    repo: "git@github.com:JARRAH2000/AnsibleTutorial.git"
+    dest: "/home/basheer/Desktop/ansible/AnsibleTutorial"
+    sshkey: "/home/basheer/.ssh/ansible"
+  tasks:
+    - name: ensure git pkg installed
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: true
+      become: true
+    - name: checkout git repo
+      ansible.builtin.git:
+        repo: "{{ repo }}"
+        dest: "{{ dest }}"
+        key_file: "{{ sshkey }}"
+...

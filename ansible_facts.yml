@@ -1,0 +1,8 @@
+---
+- name: facts_printall
+  hosts: all
+  tasks:
+    - name: Print a fact
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts.all_ipv6_addresses }}"
+...

@@ -1,0 +1,16 @@
+---
+- name: Rolling update
+  hosts: all
+  become: true
+  tasks:
+    - name: latest nginx package
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+      notify: restart nginx
+  handlers:
+    - name: restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+...
