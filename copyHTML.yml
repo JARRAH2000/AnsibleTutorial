@@ -1,0 +1,11 @@
+---
+- name: copy html file
+  hosts: all
+  become: true
+  tasks:
+    - name: copy html file
+      ansible.builtin.copy:
+        src: ~/Desktop/ansible/AnsibleTutorial/placeholder.html.j2
+        dest: /home/placeholder.html.j2
+        mode: '0666'
+...

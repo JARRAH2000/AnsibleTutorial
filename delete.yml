@@ -1,0 +1,12 @@
+---
+- name: file module demo
+  hosts: all
+  vars:
+    mypath: "/home/simone/created_dir"
+  become: false
+  tasks:
+    - name: "{{ mypath }} not present"
+      ansible.builtin.file:
+        path: "{{ mypath }}"
+        state: absent
+...

@@ -5,7 +5,7 @@
   vars:
     repo: "git@github.com:JARRAH2000/AnsibleTutorial.git"
     dest: "/home/basheer/Desktop/ansible/AnsibleTutorial"
-    sshkey: "/home/basheer/.ssh/ansible"
+    sshkey: "/home/basheer/.ssh/ansible.pub"
   tasks:
     - name: ensure git pkg installed
       ansible.builtin.apt:

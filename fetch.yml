@@ -1,0 +1,13 @@
+---
+- name: fetch module demo
+  hosts: all
+  become: true
+  vars:
+    to_be_fetched: "/home/fetched"
+    into: "/home/basheer/Desktop"
+  tasks:
+    - name: fetch file
+      ansible.builtin.fetch:
+        src: "{{ to_be_fetched }}"
+        dest: "{{ into }}"
+...

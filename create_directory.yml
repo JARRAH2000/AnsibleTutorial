@@ -1,0 +1,14 @@
+---
+- name: file module demo
+  hosts: all
+  vars:
+    mydir: "/home/simone/created_dir"
+  tasks:
+    - name: Creating a directory
+      ansible.builtin.file:
+        path: "{{ mydir }}"
+        state: directory
+        owner: simone
+        group: root
+        mode: '0644'
+...

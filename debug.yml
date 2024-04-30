@@ -1,12 +1,21 @@
 ---
 - name: shell module demo
   hosts: all
+  become: true
   tasks:
     - name: list file(s) and folder(s)
-      ansible.builtin.command: 'ls -l *'
+      ansible.builtin.command: 'ls'
       register: command_output
 
     - name: command output
       ansible.builtin.debug:
         var: command_output.stdout_lines
+
+    - name: echo PATH
+      ansible.builtin.command: 'echo $PATH'
+      register: path_env
+
+    - name: print path
+      ansible.builtin.debug:
+        var: path_env.stdout_lines
 ...

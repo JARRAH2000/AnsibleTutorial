@@ -1,6 +1,7 @@
 ---
 - name: localhost demo
   hosts: all
+  become: true
   vars:
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
@@ -8,4 +9,9 @@
     - name: print hostname
       ansible.builtin.debug:
         msg: "{{ inventory_hostname }}"
+
+    - name: install slurp
+      ansible.builtin.apt:
+        name: slurp
+        state: latest
 ...

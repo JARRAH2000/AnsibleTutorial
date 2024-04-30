@@ -1,0 +1,12 @@
+---
+- name: get configuration
+  hosts: all
+  tasks:
+    - name: read sysctl.config
+      ansible.builtin.command: 'cat /etc/sysctl.conf'
+      register: config
+
+    - name: print file
+      ansible.builtin.debug:
+        var: config.stdout_lines
+...

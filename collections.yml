@@ -1,0 +1,14 @@
+---
+- name: modprobe demo
+  hosts: all
+  become: true
+  vars:
+    module_name: "dummy"
+    ansible_connection: local
+
+  tasks:
+    - name: load the module
+      community.general.modprobe:
+        name: "{{ module_name }}"
+        state: present
+...

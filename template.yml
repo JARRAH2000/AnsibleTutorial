@@ -1,0 +1,20 @@
+---
+- name: install nano
+  hosts: all
+  become: true
+  vars:
+    page_title: "Placeholder"
+    page_description: |
+      This is  my placeholder example.
+      Multiline is possible.
+  tasks:
+    - name: install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+
+    - name: apply page template
+      ansible.builtin.template:
+        src: ~/Desktop/ansible/AnsibleTutorial/placeholder.html.j2
+        dest: /home/placeholder.html.j2
+...

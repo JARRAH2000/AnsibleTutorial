@@ -1,0 +1,13 @@
+---
+- name: copy module demo
+  hosts: all
+  vars:
+    myfile: "{{ '/home/simone/example.txt' }}"
+
+  tasks:
+    - name: create a text file
+      ansible.builtin.copy:
+        dest: "{{ myfile }}"
+        content: |
+            This file is going to have a hard link
+...
