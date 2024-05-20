@@ -2,6 +2,7 @@
 - name: shell module demo
   hosts: all
   become: true
+  gather_facts: false
   tasks:
     - name: list file(s) and folder(s)
       ansible.builtin.command: 'ls'

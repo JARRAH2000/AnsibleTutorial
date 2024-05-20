@@ -1,0 +1,21 @@
+---
+- name: concatenate demo
+  hosts: all
+  become: false
+  gather_facts: true
+
+  vars:
+    myinput: "/home/basheer/Desktop/ansible/AnsibleTutorial/includes.yml"
+    myoutput: "~/output.txt"
+
+  tasks:
+    - name: include file list
+      include_vars:
+        file: "{{ myinput }}"
+        name: files
+
+    - name: concatenate
+      ansible.builtin.template:
+        src: templates/concatenate.j2
+        dest: "{{ myoutput }}"
+...

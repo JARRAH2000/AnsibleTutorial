@@ -1,0 +1,16 @@
+---
+- name: user module demo
+  hosts: all
+  become: true
+  vars:
+    myuser: "example"
+    mygroups:
+      - adm
+      - sys
+  tasks:
+    - name: adding secondary group(s)
+      ansible.builtin.user:
+        name: "{{ myuser }}"
+        groups: "{{ mygroups }}"
+        append: true
+...
